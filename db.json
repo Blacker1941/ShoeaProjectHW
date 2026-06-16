@@ -1,0 +1,32 @@
+{
+  "onboarding": [
+    {
+      "id": 1,
+      "subtitle": "Welcome to 👋",
+      "title": "Shoea",
+      "description": "The best sneakers & shoes e-commerce app of the century for your fashion needs!",
+      "image": "images/shoe1.jpg"
+    },
+    {
+      "id": 2,
+      "subtitle": "",
+      "title": "We provide high quality products just for you",
+      "description": "High quality products from the best brands.",
+      "image": "images/shoe2.jpg"
+    },
+    {
+      "id": 3,
+      "subtitle": "",
+      "title": "Your satisfaction is our number one priority",
+      "description": "We care about your experience and comfort.",
+      "image": "images/shoe3.jpg"
+    },
+    {
+      "id": 4,
+      "subtitle": "",
+      "title": "Let's fulfill your fashion needs with Shoea right now!",
+      "description": "Get started and discover your style.",
+      "image": "images/shoe4.jpg"
+    }
+  ]
+}

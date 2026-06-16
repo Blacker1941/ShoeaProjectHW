@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Login</title>
+</head>
+
+<body class="bg-[#f5f5f5]">
+
+    <div class="max-w-sm mx-auto h-screen px-6 flex flex-col">
+
+        <!-- Back -->
+
+        <button id="back-btn" class="mt-8 text-xl w-fit">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <!-- Logo -->
+
+        <div class="flex justify-center mt-16">
+
+            <img
+                src="images/logo.png"
+                alt="logo"
+                class="w-16">
+
+        </div>
+
+        <!-- Title -->
+
+        <h1 class="text-3xl font-bold text-center mt-12 text-slate-800">
+            Login to Your Account
+        </h1>
+
+        <!-- Email -->
+
+        <div class="mt-10 relative">
+
+            <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                class="w-full h-12 pl-11 pr-4 bg-gray-100 rounded-lg outline-none">
+
+        </div>
+
+        <!-- Password -->
+
+        <div class="mt-4 relative">
+
+            <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                class="w-full h-12 pl-11 pr-11 bg-gray-100 rounded-lg outline-none">
+
+            <button
+                type="button"
+                id="toggle-password"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+
+                <i id="eye-icon" class="fa-solid fa-eye"></i>
+
+            </button>
+
+        </div>
+
+        <!-- Remember -->
+
+        <div class="flex justify-center items-center gap-2 mt-6">
+
+            <input
+                id="remember"
+                type="checkbox">
+
+            <label
+                for="remember"
+                class="text-sm text-gray-600">
+
+                Remember me
+
+            </label>
+
+        </div>
+
+        <!-- Button -->
+
+        <button
+            id="signin-btn"
+            disabled
+            class="mt-auto mb-8 h-12 rounded-full bg-gray-400 text-white transition">
+
+            Sign In
+
+        </button>
+
+    </div>
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Shoea</title>
+</head>
+
+<body class="overflow-hidden">
+
+    <!-- Loading Screen -->
+
+    <div id="loading"
+        class="fixed inset-0 bg-[#f5f5f5] flex flex-col justify-center items-center">
+
+        <div class="flex items-center gap-2">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-8 h-8"
+                viewBox="0 0 24 24"
+                fill="currentColor">
+
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48
+                10 10 10 10-4.48 10-10S17.52
+                2 12 2zm1 17.93V18h-2v1.93A8.001
+                8.001 0 014.07 13H6v-2H4.07A8.001
+                8.001 0 0111 4.07V6h2V4.07A8.001
+                8.001 0 0119.93 11H18v2h1.93A8.001
+                8.001 0 0113 19.93z"/>
+            </svg>
+
+            <h1 class="text-4xl font-bold">
+                Shoea
+            </h1>
+
+        </div>
+
+        <div class="absolute bottom-24">
+            <div class="w-10 h-10 border-4 border-gray-300 border-t-black rounded-full animate-spin">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Onboarding -->
+
+    <section id="onboarding"
+        class="hidden relative h-screen w-full overflow-hidden">
+
+        <img id="slide-image"
+            src=""
+            class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent">
+        </div>
+
+        <div class="absolute bottom-0 w-full bg-white rounded-t-[40px] p-6">
+
+            <p id="slide-subtitle"
+                class="text-sm text-gray-500">
+            </p>
+
+            <h2 id="slide-title"
+                class="text-3xl font-bold mt-2">
+            </h2>
+
+            <p id="slide-description"
+                class="text-gray-500 mt-3">
+            </p>
+
+            <div id="dots"
+                class="flex justify-center gap-2 mt-8">
+            </div>
+
+            <button id="next-btn"
+                class="mt-6 w-full h-12 rounded-full bg-black text-white">
+                Next
+            </button>
+            
+
+        </div>
+
+    </section>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+
