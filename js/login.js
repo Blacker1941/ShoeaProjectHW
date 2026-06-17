@@ -157,6 +157,6 @@ signInBtn.addEventListener("click", () => {
 
     // انتقال به صفحه اصلی
 
-    // window.location.href = "home.html";
+     window.location.href = "home.html";
 
 });
