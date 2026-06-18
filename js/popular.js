@@ -1,6 +1,5 @@
 const productsContainer = document.querySelector("#products");
 const filtersContainer  = document.querySelector("#filters");
-const emptyState        = document.querySelector("#empty");
 
 let allProducts  = [];
 let wishlist     = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -11,10 +10,21 @@ const filterBrands = ["All", "Nike", "Adidas", "Puma", "Asics", "Reebok", "New B
 /* ─── Load products ─── */
 async function loadProducts() {
   try {
-    const res   = await fetch("http://localhost:3000/products");
+    const res  = await fetch("http://localhost:3000/products");
     allProducts = await res.json();
+
+    const selected = localStorage.getItem("selectedBrand");
+    if (selected) {
+      activeBrand = selected;
+      localStorage.removeItem("selectedBrand");
+    }
+
     renderFilters();
-    renderWishlist(activeBrand);
+    renderProducts(
+      activeBrand === "All"
+        ? allProducts
+        : allProducts.filter(p => p.brand === activeBrand)
+    );
   } catch (e) {
     productsContainer.innerHTML = `
       <div class="col-span-2 text-center text-gray-400 text-sm py-10">
@@ -35,7 +45,7 @@ function renderFilters() {
   `).join("");
 }
 
-/* ─── Filter ─── */
+/* ─── Filter by brand ─── */
 function filterBrand(brand) {
   activeBrand = brand;
 
@@ -46,57 +56,39 @@ function filterBrand(brand) {
     } px-5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all`;
   });
 
-  renderWishlist(brand);
+  renderProducts(
+    brand === "All" ? allProducts : allProducts.filter(p => p.brand === brand)
+  );
 }
 
-/* ─── Render wishlist ─── */
-function renderWishlist(brand) {
-  /* Re-read from localStorage in case it changed */
-  wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-
-  let wished = allProducts.filter(p => wishlist.includes(p.id));
-
-  if (brand !== "All") {
-    wished = wished.filter(p => p.brand === brand);
-  }
-
-  if (!wished.length) {
-    productsContainer.innerHTML = "";
-    emptyState.classList.remove("hidden");
+/* ─── Render products ─── */
+function renderProducts(products) {
+  if (!products.length) {
+    productsContainer.innerHTML = `
+      <div class="col-span-2 text-center text-gray-400 text-sm py-10">No products found.</div>`;
     return;
   }
 
-  emptyState.classList.add("hidden");
-
-  productsContainer.innerHTML = wished.map(product => {
-    /* Fake rating data per product for display */
-    const rating = (4.3 + (product.id % 3) * 0.2).toFixed(1);
-    const sold   = (3000 + product.id * 841).toLocaleString();
-
+  productsContainer.innerHTML = products.map(product => {
+    const inWishlist = wishlist.includes(product.id);
     return `
     <div onclick="location.href='product.html?id=${product.id}'"
       class="bg-[#f5f5f5] rounded-3xl p-3 cursor-pointer hover:scale-[1.02] transition-transform duration-200 relative">
 
-      <!-- Remove from wishlist -->
-      <button onclick="event.stopPropagation(); removeWishlist(${product.id}, this)"
+      <button onclick="event.stopPropagation(); toggleWishlist(${product.id}, this)"
         class="absolute top-3 right-3 w-7 h-7 flex items-center justify-center
-               rounded-full bg-white shadow-sm text-sm z-10 text-red-500">
-        ♥
+               rounded-full bg-white shadow-sm text-sm z-10">
+        <span class="${inWishlist ? "text-red-500" : "text-gray-400"}">${inWishlist ? "♥" : "♡"}</span>
       </button>
 
-      <div class="h-[96px] flex items-center justify-center">
+      <div class="h-[100px] flex items-center justify-center">
         <img src="${product.image}?w=300&auto=format"
           class="h-full w-full object-contain" alt="${product.title}">
       </div>
 
       <div class="mt-3 px-1">
         <h3 class="font-semibold text-xs text-gray-900 line-clamp-1">${product.title}</h3>
-        <div class="flex items-center gap-1 mt-1">
-          <span class="text-yellow-400 text-[10px]">&#9733;</span>
-          <span class="text-[10px] text-gray-600 font-medium">${rating}</span>
-          <span class="text-[10px] text-gray-400">${sold} sold</span>
-        </div>
-        <p class="text-sm font-bold text-gray-900 mt-1">$${product.price.toFixed(2)}</p>
+        <p class="text-sm font-bold text-gray-900 mt-1">$ ${product.price.toFixed(2)}</p>
       </div>
 
     </div>
@@ -104,17 +96,18 @@ function renderWishlist(brand) {
   }).join("");
 }
 
-/* ─── Remove from wishlist ─── */
-function removeWishlist(id, btn) {
-  wishlist = wishlist.filter(i => i !== id);
+/* ─── Wishlist toggle ─── */
+function toggleWishlist(id, btn) {
+  if (wishlist.includes(id)) {
+    wishlist = wishlist.filter(i => i !== id);
+  } else {
+    wishlist.push(id);
+  }
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  /* Animate card out then re-render */
-  const card = btn.closest("div[onclick]");
-  card.style.transition = "opacity 0.2s, transform 0.2s";
-  card.style.opacity    = "0";
-  card.style.transform  = "scale(0.95)";
-  setTimeout(() => renderWishlist(activeBrand), 220);
+  const span = btn.querySelector("span");
+  span.textContent = wishlist.includes(id) ? "♥" : "♡";
+  span.className   = wishlist.includes(id) ? "text-red-500" : "text-gray-400";
 }
 
 loadProducts();

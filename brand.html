@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Brand</title>
+  <style>
+    ::-webkit-scrollbar { display: none; }
+    body { font-family: sans-serif; }
+  </style>
+</head>
+<body class="bg-white">
+
+  <div class="max-w-[390px] mx-auto min-h-screen bg-white">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 px-5 pt-10 pb-4">
+      <button onclick="history.back()"
+        class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 font-semibold text-lg">
+        &#8592;
+      </button>
+      <h1 class="font-bold text-xl text-gray-900" id="brand-title">Brand</h1>
+    </div>
+
+    <!-- Products -->
+    <div id="products" class="grid grid-cols-2 gap-3 px-5 pb-10"></div>
+
+  </div>
+
+  <script src="./js/brand.js"></script>
+</body>
+</html>
