@@ -94,43 +94,53 @@ function render(p) {
       </p>
     </div>
 
-    <!-- Size + Color side by side -->
-    <div class="flex gap-8 mt-5">
+<!-- Size + Color side by side -->
+    <div class="mt-5">
+      <div class="flex gap-16">
+        <h3 class="font-semibold text-sm text-gray-900">Size</h3>
+        <h3 class="font-semibold text-sm text-gray-900">Color</h3>
+      </div>
 
-      <div>
-        <h3 class="font-semibold text-sm text-gray-900 mb-2.5">Size</h3>
+      <div class="flex items-center gap-3 mt-2.5">
+
+        <!-- Size buttons -->
         <div class="flex gap-2" id="size-container">
           ${sizes.map(s => `
             <button onclick="selectSize(${s})" id="size-${s}"
-              class="w-10 h-10 rounded-full text-xs font-semibold transition-all
+              class="w-10 h-10 rounded-full text-xs font-semibold border transition-all
                 ${s === selectedSize
-                  ? "bg-gray-900 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"}">
+                  ? "bg-gray-900 text-white border-gray-900"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}">
               ${s}
             </button>
           `).join("")}
         </div>
-      </div>
 
-      <div>
-        <h3 class="font-semibold text-sm text-gray-900 mb-2.5">Color</h3>
+        <!-- Divider -->
+        <div class="w-px h-8 bg-gray-200 mx-1"></div>
+
+        <!-- Color buttons -->
         <div class="flex gap-2 items-center" id="color-container">
           ${colors.map(c => `
             <button onclick="selectColor('${c.name}')" id="color-${c.name}"
-              class="flex items-center justify-center w-8 h-8 rounded-full transition-all"
-              style="background:${c.hex}; ${c.name === selectedColor
-                ? "outline: 2.5px solid #111; outline-offset: 2px;"
-                : ""}">
+              class="flex items-center justify-center rounded-full transition-all flex-shrink-0"
+              style="
+                width: 32px;
+                height: 32px;
+                background: ${c.hex};
+                outline: ${c.name === selectedColor ? "2px solid #111" : "2px solid transparent"};
+                outline-offset: 2px;
+              ">
               ${c.name === selectedColor
-                ? `<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                     <path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                ? `<svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                     <path d="M2.5 6.5l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                    </svg>`
                 : ""}
             </button>
           `).join("")}
         </div>
-      </div>
 
+      </div>
     </div>
 
     <!-- Quantity -->
