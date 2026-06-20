@@ -121,12 +121,6 @@ function renderProducts(products) {
         <h3 class="font-semibold text-xs text-gray-900 line-clamp-1">${product.title}</h3>
         <div class="flex justify-between items-center mt-2">
           <p class="text-sm font-bold text-gray-900">$ ${product.price.toFixed(2)}</p>
-          <button
-            onclick="event.stopPropagation(); addToCart(${product.id}, this)"
-            class="w-7 h-7 rounded-full bg-gray-900 text-white text-lg leading-none
-                   flex items-center justify-center hover:bg-gray-700 transition-colors">
-            +
-          </button>
         </div>
       </div>
 
