@@ -214,19 +214,6 @@
       setTimeout(render, 320);
     }
 
-    /* ─── Checkout ─── */
-    function checkout() {
-      const toast = document.createElement("div");
-      toast.className = "fixed top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-5 py-2.5 rounded-full z-[999] shadow-lg font-medium";
-      toast.textContent = "Order placed! 🎉";
-      document.body.appendChild(toast);
-      setTimeout(() => {
-        localStorage.removeItem("cart");
-        toast.remove();
-        render();
-      }, 1800);
-    }
-
     /* ─── Init ─── */
     seedDemoCart();
     render();
