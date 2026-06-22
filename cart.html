@@ -58,6 +58,19 @@
       </button>
     </div>
 
+    <!-- Checkout bar -->
+      <div id="checkoutBar" class="px-5 pb-20 pt-1 flex items-center justify-between">
+        <div>
+          <p class="text-[11px] text-gray-400 font-medium">Total price</p>
+          <p id="totalPrice" class="text-xl font-bold text-gray-900">$0.00</p>
+        </div>
+        <button  onclick="location.href='checkout.html'"
+          class="flex items-center gap-2 bg-gray-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-gray-700 transition-colors">
+          Checkout
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
     <!-- FOOTER: Total + Checkout -->
     <div id="cartFooter" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] bg-white z-40">
       <!-- Bottom Nav -->
@@ -90,18 +103,7 @@
 
       </div>
 
-      <!-- Checkout bar -->
-      <div id="checkoutBar" class="px-5 pb-6 pt-1 flex items-center justify-between">
-        <div>
-          <p class="text-[11px] text-gray-400 font-medium">Total price</p>
-          <p id="totalPrice" class="text-xl font-bold text-gray-900">$0.00</p>
-        </div>
-        <button  onclick="location.href='checkout.html'"
-          class="flex items-center gap-2 bg-gray-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-gray-700 transition-colors">
-          Checkout
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
+      
     </div>
 
   </div>

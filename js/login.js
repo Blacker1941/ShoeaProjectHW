@@ -1,162 +1,50 @@
-const emailInput = document.querySelector("#email");
-const passwordInput = document.querySelector("#password");
-const rememberMe = document.querySelector("#remember");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const rememberCheckbox = document.getElementById("remember");
+const signinBtn = document.getElementById("signin-btn");
+const togglePassword = document.getElementById("toggle-password");
+const eyeIcon = document.getElementById("eye-icon");
 
-const signInBtn = document.querySelector("#signin-btn");
-
-const togglePassword =
-    document.querySelector("#toggle-password");
-
-const eyeIcon =
-    document.querySelector("#eye-icon");
-
-const backBtn =
-    document.querySelector("#back-btn");
-
-
-// برگشت
-
-backBtn.addEventListener("click", () => {
-
-    window.history.back();
-
-});
-
-
-// نمایش و مخفی کردن پسورد
-
-togglePassword.addEventListener("click", () => {
-
-    if (passwordInput.type === "password") {
-
-        passwordInput.type = "text";
-
-        eyeIcon.classList.remove("fa-eye");
-        eyeIcon.classList.add("fa-eye-slash");
-
-    } else {
-
-        passwordInput.type = "password";
-
-        eyeIcon.classList.remove("fa-eye-slash");
-        eyeIcon.classList.add("fa-eye");
-
-    }
-
-});
-
-
-// فعال شدن دکمه
-
-function checkInputs() {
-
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value.trim();
-
-    if (email && password) {
-
-        signInBtn.disabled = false;
-
-        signInBtn.classList.remove(
-            "bg-gray-400"
-        );
-
-        signInBtn.classList.add(
-            "bg-[#1d232d]"
-        );
-
-    } else {
-
-        signInBtn.disabled = true;
-
-        signInBtn.classList.remove(
-            "bg-[#1d232d]"
-        );
-
-        signInBtn.classList.add(
-            "bg-gray-400"
-        );
-
-    }
-
+// اگه قبلاً Remember زده بود، مستقیم بره داخل
+const saved = JSON.parse(localStorage.getItem("rememberedUser"));
+if (saved?.email) {
+    window.location.href = "home.html";
 }
 
-emailInput.addEventListener(
-    "input",
-    checkInputs
-);
+// فعال/غیرفعال کردن دکمه Sign In
+function checkInputs() {
+    signinBtn.disabled =
+        !emailInput.value || !passwordInput.value;
+    signinBtn.className = signinBtn.disabled
+        ? "mt-auto mb-8 h-12 rounded-full bg-gray-400 text-white transition"
+        : "mt-auto mb-8 h-12 rounded-full bg-black text-white transition";
+}
 
-passwordInput.addEventListener(
-    "input",
-    checkInputs
-);
+emailInput.addEventListener("input", checkInputs);
+passwordInput.addEventListener("input", checkInputs);
 
-
-// بارگذاری اطلاعات ذخیره شده
-
-window.addEventListener("load", () => {
-
-    const savedEmail =
-        localStorage.getItem("email");
-
-    const savedRemember =
-        localStorage.getItem("remember");
-
-    if (savedEmail) {
-
-        emailInput.value = savedEmail;
-
-    }
-
-    if (savedRemember === "true") {
-
-        rememberMe.checked = true;
-
-    }
-
-    checkInputs();
-
+// نمایش/مخفی کردن پسورد
+togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    eyeIcon.className = isPassword
+        ? "fa-solid fa-eye-slash"
+        : "fa-solid fa-eye";
 });
 
-
-// ورود
-
-signInBtn.addEventListener("click", () => {
-
-    const email =
-        emailInput.value.trim();
-
-    if (rememberMe.checked) {
-
-        localStorage.setItem(
-            "email",
-            email
-        );
-
-        localStorage.setItem(
-            "remember",
-            "true"
-        );
-
+// Sign In
+signinBtn.addEventListener("click", () => {
+    if (rememberCheckbox.checked) {
+        localStorage.setItem("rememberedUser", JSON.stringify({
+            email: emailInput.value
+        }));
     } else {
-
-        localStorage.removeItem(
-            "email"
-        );
-
-        localStorage.removeItem(
-            "remember"
-        );
-
+        localStorage.removeItem("rememberedUser");
     }
+    window.location.href = "index.html";
+});
 
-    alert("Login Success");
-
-    // انتقال به صفحه اصلی
-
-     window.location.href = "home.html";
-
+// دکمه Back
+document.getElementById("back-btn").addEventListener("click", () => {
+    history.back();
 });

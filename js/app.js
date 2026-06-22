@@ -1,4 +1,3 @@
-
 const loading = document.querySelector("#loading");
 const onboarding = document.querySelector("#onboarding");
 
@@ -41,7 +40,7 @@ const slides = [
 
     {
         type: "welcome",
-        image: "images/1.jpg",
+        image: "https://dkstatics-public.digikala.com/digikala-products/45ce18ac54d6fc4c3aee7d978e0c41835fa28245_1763364242.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
         subtitle: "Welcome to 👋",
         title: "Shoea",
         description:
@@ -50,7 +49,7 @@ const slides = [
 
     {
         type: "normal",
-        image: "images/2.jpg",
+        image: "https://dkstatics-public.digikala.com/digikala-products/a41395c56d41728d7eaf6e018982febfc3b67710_1781009562.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
         title:
             "We provide high quality products just for you",
         description: ""
@@ -58,7 +57,7 @@ const slides = [
 
     {
         type: "normal",
-        image: "images/3.jpg",
+        image: "https://dkstatics-public.digikala.com/digikala-products/b2d909b1a08911d89ebac273ae5eafe13aa92d5c_1776087191.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
         title:
             "Your satisfaction is our number one priority",
         description: ""
@@ -66,7 +65,7 @@ const slides = [
 
     {
         type: "normal",
-        image: "images/4.jpg",
+        image: "https://dkstatics-public.digikala.com/digikala-products/7521076e7e24e3ba69801c8831d61cd28ea95aca_1759516148.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
         title:
             "Let's fulfill your fashion needs with shoea right now!",
         description: ""

@@ -294,7 +294,7 @@
         const inWishlist = wishlist.includes(p.id);
         const stars = Math.round(p.rating);
         return `
-          <div class="result-card bg-[#f5f5f5] rounded-3xl p-3 cursor-pointer relative">
+          <div onclick="location.href='product.html?id=${p.id}'" class="result-card bg-[#f5f5f5] rounded-3xl p-3 cursor-pointer relative">
 
             <!-- Wishlist -->
             <button onclick="toggleWishlist(${p.id}, this)"
@@ -306,7 +306,7 @@
             <div class="h-[95px] flex items-center justify-center overflow-hidden rounded-2xl">
               <img src="${p.image}?w=300&auto=format"
                 class="h-full w-full object-cover" alt="${p.title}"
-                onerror="this.src='https://via.placeholder.com/300x200?text=Shoe'">
+                ">
             </div>
 
             <!-- Info -->
