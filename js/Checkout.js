@@ -5,6 +5,16 @@ const COLORS = {
 };
 
 /* ============================================================
+   محصولات از API
+============================================================ */
+let products = [];
+
+async function loadProducts() {
+  const res = await fetch('http://localhost:3000/products');
+  products = await res.json();
+}
+
+/* ============================================================
    خواندن سبد از localStorage
 ============================================================ */
 function getCart() {
@@ -15,10 +25,11 @@ function getCart() {
 function buildItems() {
   const cart = getCart();
   return cart.map(item => {
-    const p     = products.find(p => p.id === item.id);
+    const p = products.find(p => p.id === item.id);
     if (!p) return null;
-    const color = item.color || "Black";
-    const size  = item.size  || 42;
+    const colorRaw = item.color || "Black";
+    const color    = colorRaw.charAt(0).toUpperCase() + colorRaw.slice(1);
+    const size     = item.size || 42;
     return {
       id:    p.id,
       name:  p.title,
@@ -34,8 +45,8 @@ function buildItems() {
 /* ============================================================
    STATE
 ============================================================ */
-const ITEMS = buildItems();
-const AMOUNT = ITEMS.reduce((s, i) => s + i.price, 0);
+let ITEMS  = [];
+let AMOUNT = 0;
 const PROMO_PERCENT = 0.30;
 
 const SHIPPING_ICONS = {
@@ -60,7 +71,7 @@ let pin = "";
 function fmt(n) { return "$" + n.toFixed(2); }
 
 /* ============================================================
-   RENDER ITEMS  (تصویر واقعی + اطلاعات کارت)
+   RENDER ITEMS
 ============================================================ */
 function renderItems() {
   const wrap = document.getElementById("checkout-items");
@@ -273,6 +284,12 @@ function viewReceipt() { resetAfterSuccess(); }
 /* ============================================================
    INIT
 ============================================================ */
-renderItems();
-renderShippingRow();
-renderSummary();
+async function init() {
+  await loadProducts();      // ← اول محصولات از API لود میشن
+  ITEMS  = buildItems();     // ← بعد cart با محصولات ترکیب میشه
+  AMOUNT = ITEMS.reduce((s, i) => s + i.price, 0);
+  renderItems();
+  renderShippingRow();
+  renderSummary();
+}
+init();
